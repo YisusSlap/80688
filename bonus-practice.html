@@ -1,0 +1,85 @@
+<!-- 1.- a travez de un formulario indicar la imagen que se desea cargar
+2.- tenga un contenedor a donde pueda ir salvando las imagenes(moverlas)
+3.- a travez del mismo formulaario le puede indicar 1,2,3 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1{
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        form{
+            
+            box-shadow: 10px 20px 15px;
+            width: 300px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input{
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid gray;
+        }
+        input[type="submit"]{
+            color: white;
+            background-color: blue; 
+        }
+        label{
+            display: block;
+        }
+        figure{
+            text-align: center;
+            display: inline-block;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Aqui esto es el formulario -->
+    <h1>Solicitud de Imagenes</h1>
+    <form action="" id="formulario" >
+        <label for="image">Numero de imagen:</label>
+        <input type="text" id="image" name="image">
+        <input type="submit" value="Solicitar" >
+    </form>
+    <div id="app"></div>
+    <script>
+        const app = document.getElementById("app")
+        const url="https://picsum.photos/id/"
+        const size="/200/200"
+        
+        const loginform = document.getElementById("formulario")
+        loginform.addEventListener("submit", evento =>{
+            evento.preventDefault()
+            let u = document.getElementById("image").value
+            const Picture = (parametro) =>{
+            const src=url+parametro.id+size
+            return `
+                <figure>
+                    <img src="${src}" alt="">
+                    <figcaption>${parametro.id}</figcaption>
+                </figure>
+            `
+            }
+            app.innerHTML=Picture({id:u})
+        })
+    </script>
+</body>
+</html>
